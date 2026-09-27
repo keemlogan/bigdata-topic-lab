@@ -37,7 +37,7 @@
  <div class="tw"><table>
   <tr><th>주제</th><th>받은 데이터</th><th>건수</th><th>걸린 시간</th><th>전체 규모(확인값)</th></tr>
   <tr><td>T1 가게 생존</td><td>서울 일반음식점·휴게음식점 인허가 전체 (서울 열린데이터)</td><td>685,780</td><td>약 2.5분</td><td>전국 2,947,890 (행안부 API)</td></tr>
-  <tr><td>T2·T3 부동산</td><td>서울 25개 구 연립다세대 전월세·매매 2019–2025 (국토부 API)</td><td id="h-rt">적재 중</td><td id="h-rtt">–</td><td>전국 매매 2006~, 전월세 2011~</td></tr>
+  <tr><td>T2·T3 부동산</td><td>서울 25개 구 연립다세대 전월세·매매 2019–2025 (국토부 API)</td><td id="h-rt">1,200,240<br><span class="small">전월세 916,150 · 매매 284,090</span></td><td id="h-rtt">약 21분 (호출 4,200회)</td><td>전국 매매 2006~, 전월세 2011~</td></tr>
   <tr><td>T4 공공조달</td><td>용역 낙찰목록 2025년 6~8월 (조달청 API)</td><td>25,234</td><td>약 1.5분 (27회 호출)</td><td>2008~ (하루 1,000회 한도)</td></tr>
   <tr><td>T5 농산물</td><td>가락시장 품목·등급별 경락가 전체 (서울 열린데이터)</td><td>503,023</td><td>약 40초</td><td>2024-08-28~ (KAMIS 대기)</td></tr>
  </table></div>
@@ -148,10 +148,10 @@
 <!-- ================================================================ T5 -->
 <section id="t5">
  <h2>T5 농산물 등급 가격차 (에스앤이컴퍼니형)</h2>
- <p class="lead">가락시장 품목·등급별 경락가로 “하품 값은 특품 값의 몇 %인가”를 계산했습니다.</p>
+ <p class="lead">가락시장 품목·등급별 경락가로 “하품 가격은 특품 가격의 몇 %인가”를 계산했습니다.</p>
  <div class="grid" id="t5-kpi"></div>
  <h3>① 지금 결과</h3>
- <div class="card"><b>품목별 하품 ÷ 특품 가격비 (주 평균)</b> &nbsp;<select id="t5-sel"></select><div class="chart"><canvas id="t5-chart"></canvas></div></div>
+ <div class="card"><b>품목별 하품/특품 가격비 (주 평균)</b> <span class="small">이월 값 제외</span> &nbsp;<select id="t5-sel"></select><div class="chart"><canvas id="t5-chart"></canvas></div></div>
  <div class="card"><b>관측이 많은 품목 20개</b><div class="tw"><table id="t5-table"></table></div></div>
  <div class="note"><b>지금 데이터에서 확인된 사실</b><ul id="t5-facts" style="margin:6px 0 0"></ul></div>
  <h3>② 데이터를 더 모으면</h3>
@@ -188,6 +188,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="topics.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -128,7 +128,7 @@ async function drawT5() {
   kpis("#t5-kpi", [
     [fmt(s.rows), "가락시장 품목·등급별 가격 기록"],
     [s.days + "일", `거래일 수 (${s.date_min} ~ ${s.date_max})`],
-    [fmt(s.items), "품목 수"],
+    [pct(s.repeat_share), "전날 값이 그대로 이월된 기록 (분석에서 제외)"],
     [s.spread_forecast_last26w.naive + "%", "다음 주 가격비 예측 오차 (지난주 값 그대로)"],
   ]);
   const sel = $("#t5-sel");
@@ -138,17 +138,18 @@ async function drawT5() {
     const ser = d.series[sel.value];
     if (ch) ch.destroy();
     ch = chart("t5-chart", { type: "line", data: { labels: ser.map((x) => x[0]), datasets: [{ label: sel.value, data: ser.map((x) => x[1] * 100), borderColor: "#16a34a", pointRadius: 0, borderWidth: 2 }] },
-      options: { maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (t) => `하품 = 특품의 ${t.parsed.y.toFixed(1)}%` } } },
-        scales: { y: { min: 0, title: { display: true, text: "하품 ÷ 특품 (%)" } }, x: { ticks: { maxTicksLimit: 8 } } } } });
+      options: { maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (t) => `하품 가격 = 특품의 ${t.parsed.y.toFixed(1)}%` } } },
+        scales: { y: { min: 0, title: { display: true, text: "하품/특품 (%)" } }, x: { ticks: { maxTicksLimit: 8 } } } } });
   };
   sel.onchange = draw;
   draw();
-  $("#t5-table").innerHTML = `<tr><th>품목</th><th>관측 수 (날짜×단위)</th><th>하품÷특품 평균</th><th>변동 (표준편차)</th></tr>` +
+  $("#t5-table").innerHTML = `<tr><th>품목</th><th>관측 수 (날짜×단위)</th><th>하품/특품 평균</th><th>변동 (표준편차)</th></tr>` +
     d.items.slice(0, 20).map((r) => `<tr><td>${r[0]}</td><td>${fmt(r[1])}</td><td>${pct(r[2])}</td><td>${(r[3] * 100).toFixed(1)}%p</td></tr>`).join("");
   $("#t5-facts").innerHTML = [
-    `<b>등급 간 가격차는 품목마다 크게 다릅니다.</b> 하품이 특품의 약 30%(생표고)인 품목부터 60% 이상(양파)인 품목까지 있습니다.`,
-    `<b>같은 품목 안에서도 흔들림이 큽니다.</b> 가격비의 표준편차가 13~22%p라, “못난이는 늘 몇 %”라고 고정 가격을 정하기 어렵습니다. 그래서 예측이 필요하다는 근거가 됩니다.`,
-    `<b>단순 예측의 오차는 약 15%입니다.</b> 최근 26주 동안 ${s.spread_forecast_items}개 품목에 대해 “지난주 가격비 그대로”로 예측하면 평균 오차 ${s.spread_forecast_last26w.naive}%, “최근 4주 평균”은 ${s.spread_forecast_last26w.ma4}%였습니다. 더 나은 모델은 이 기준을 넘어야 의미가 있습니다.`,
+    `<b>데이터 품질 문제를 먼저 발견했습니다.</b> 기록의 ${pct(s.repeat_share)}가 전날과 똑같은 평균가였습니다. 거래가 없는 날 값을 이월한 것으로 보고 제외했고, 남은 ${fmt(s.rows_after_repeat_removal)}건으로 계산했습니다.`,
+    `<b>등급 간 가격차는 품목마다 크게 다릅니다.</b> 하품 가격이 특품의 약 28%(생표고)인 품목부터 약 60%(양파·대파)인 품목까지 있습니다.`,
+    `<b>같은 품목 안에서도 흔들림이 큽니다.</b> 가격비의 표준편차가 품목별로 약 9~22%p라, “못난이는 늘 특품의 몇 %”로 고정하기 어렵습니다. 그래서 예측이 필요하다는 근거가 됩니다.`,
+    `<b>단순 예측의 오차는 약 16%입니다.</b> 최근 26주 동안 ${s.spread_forecast_items}개 품목에 대해 “지난주 가격비 그대로”로 예측하면 평균 오차 ${s.spread_forecast_last26w.naive}%, “최근 4주 평균”은 ${s.spread_forecast_last26w.ma4}%였습니다. 더 나은 모델은 이 기준을 넘어야 의미가 있습니다.`,
     `<b>등급은 특·상·보통·하 네 단계</b>로 기록돼 있어 “특 대비 하”를 바로 계산할 수 있었습니다.`,
   ].map((x) => `<li>${x}</li>`).join("");
 }

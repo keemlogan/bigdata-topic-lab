@@ -1,0 +1,1 @@
+{"summary":{"trade_rows_valid":270935,"train_n":210720,"test_n":60215,"MAPE":19.3,"median_APE":14.3,"within_10pct":0.368,"below_85pct_of_estimate":0.151,"yield":{"n":57741,"median_pct":3.14,"p25_pct":1.67,"p75_pct":4.67}}}
