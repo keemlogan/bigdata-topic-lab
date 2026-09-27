@@ -111,7 +111,7 @@ async function drawT4() {
   chart("t4-win", { type: "bar", data: { labels: d.win_dist.map((x) => x[0]), datasets: [{ data: d.win_dist.map((x) => x[1]), backgroundColor: "#2563eb" }] },
     options: { maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { type: "logarithmic", title: { display: true, text: "업체 수 (로그)" } } } } });
   $("#t4-ag").innerHTML = `<tr><th>발주기관</th><th>낙찰 건수</th><th>참가 업체 중앙값</th><th>평균</th></tr>` +
-    d.agencies.map((a) => `<tr><td>${a[0]}</td><td>${fmt(a[1])}</td><td>${a[2]}</td><td>${a[3]}</td></tr>`).join("");
+    d.agencies.map((a) => `<tr><td>${a[0]}</td><td>${fmt(a[1])}건</td><td>${a[2]}곳</td><td>${a[3]}곳</td></tr>`).join("");
   $("#t4-facts").innerHTML = [
     `<b>경쟁은 ‘보통 적고, 가끔 엄청 많다’.</b> 중앙값은 ${s.participants_median}곳인데 평균은 ${s.participants_mean}곳입니다. 100곳 넘게 몰린 공고가 ${pct(s.ge_100_bidders_share)} 있어 평균을 끌어올립니다.`,
     `<b>다섯 건 중 한 건은 사실상 단독 응찰</b>입니다(${pct(s.single_bidder_share)}). 이런 공고를 찾는 것 자체가 중소기업에 유용한 정보입니다.`,
@@ -159,7 +159,10 @@ async function drawT3() { if (window.renderT3) await window.renderT3(await load(
 async function drawT2() { if (window.renderT2) await window.renderT2(await load("t2")); }
 async function drawSum() { if (window.renderSum) window.renderSum(); }
 
-const DRAW = { t1: drawT1, t3: drawT3, t2: drawT2, t4: drawT4, t5: drawT5, sum: drawSum };
+const DRAW = {
+  t1: () => { svc.t1(); drawT1(); }, t3: () => { svc.t3(); drawT3(); }, t2: () => { svc.t2(); drawT2(); },
+  t4: () => { svc.t4(); drawT4(); }, t5: () => { svc.t5(); drawT5(); }, sum: drawSum,
+};
 function show() {
   const id = (location.hash || "#home").slice(1);
   document.querySelectorAll("section").forEach((s) => s.classList.toggle("on", s.id === id));
