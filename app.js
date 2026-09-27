@@ -132,11 +132,11 @@ async function drawT5() {
 /* ---------------------------------------------------------------- T2·T3 (별도 파일) */
 async function drawT3() { if (window.renderT3) await window.renderT3(await load("t3")); }
 async function drawT2() { if (window.renderT2) await window.renderT2(await load("t2")); }
-async function drawSum() { if (window.renderSum) window.renderSum(); }
 
 const DRAW = {
-  t1: () => { svc.t1(); drawT1(); }, t3: () => { svc.t3(); drawT3(); }, t2: () => { svc.t2(); drawT2(); },
-  t5: () => { svc.t5(); drawT5(); }, sum: drawSum,
+  home: () => story.renderHome(),
+  t1: () => { story.renderTopic("t1"); svc.t1(); drawT1(); }, t3: () => { story.renderTopic("t3"); svc.t3(); drawT3(); },
+  t2: () => { story.renderTopic("t2"); svc.t2(); drawT2(); }, t5: () => { story.renderTopic("t5"); svc.t5(); drawT5(); },
 };
 function show() {
   const id = (location.hash || "#home").slice(1);

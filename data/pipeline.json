@@ -1,0 +1,197 @@
+{
+ "spark_version": "4.2.0",
+ "run_at": "2026-09-27 18:20",
+ "topics": {
+  "t1": {
+   "raw_rows": 685780,
+   "clean_rows": 685726,
+   "dropped_bad_close": 31,
+   "csv_mb": 144.6,
+   "parquet_mb": 36.2,
+   "partitions": 173,
+   "partition_cols": [
+    "kind",
+    "open_year"
+   ],
+   "table": "t1_store_license",
+   "query": {
+    "desc": "2019~2023.8 개업 성북구 커피숍의 3년 내 폐업률",
+    "csv_s": 0.34,
+    "parquet_s": 0.19,
+    "same": true
+   },
+   "checks": [
+    {
+     "claim": "2015–2019 개업 3년 생존율 (Pair RDD Kaplan–Meier)",
+     "site": 0.635,
+     "spark": 0.635,
+     "ok": true,
+     "fmt": "pct"
+    },
+    {
+     "claim": "성북구 커피숍 3년 내 폐업률",
+     "site": 0.268,
+     "spark": 0.268,
+     "ok": true,
+     "fmt": "pct"
+    },
+    {
+     "claim": "마포구 커피숍 3년 내 폐업률",
+     "site": 0.473,
+     "spark": 0.473,
+     "ok": true,
+     "fmt": "pct"
+    },
+    {
+     "claim": "서울 커피숍 3년 내 폐업률",
+     "site": 0.388,
+     "spark": 0.388,
+     "ok": true,
+     "fmt": "pct"
+    },
+    {
+     "claim": "업종 분류 이상 조합 수",
+     "site": 10,
+     "spark": 10,
+     "ok": true,
+     "fmt": "int"
+    }
+   ],
+   "seconds": 25.8
+  },
+  "t3": {
+   "raw_rows": 1200240,
+   "csv_mb": 143.4,
+   "parquet_mb": 23.0,
+   "partitions": 350,
+   "partition_cols": [
+    "deal_year",
+    "_lawd(구)"
+   ],
+   "table": "t3_rent_contract · t3_sale_contract",
+   "query": {
+    "desc": "2025년 강서구 갱신 전세 중 보증금이 내려간 비율",
+    "csv_s": 0.94,
+    "parquet_s": 0.14,
+    "same": true
+   },
+   "checks": [
+    {
+     "claim": "2023년 보증금 하락 비율",
+     "site": 0.215,
+     "spark": 0.215,
+     "ok": true,
+     "fmt": "pct"
+    },
+    {
+     "claim": "2024년 보증금 하락 비율",
+     "site": 0.233,
+     "spark": 0.233,
+     "ok": true,
+     "fmt": "pct"
+    },
+    {
+     "claim": "2025년 강서구 보증금 하락 비율",
+     "site": 0.401,
+     "spark": 0.401,
+     "ok": true,
+     "fmt": "pct"
+    },
+    {
+     "claim": "같은 건물 매매를 찾은 비율 (조인)",
+     "site": 0.584,
+     "spark": 0.584,
+     "ok": true,
+     "fmt": "pct"
+    },
+    {
+     "claim": "전세가율 중앙값",
+     "site": 0.669,
+     "spark": 0.669,
+     "ok": true,
+     "fmt": "pct"
+    },
+    {
+     "claim": "보증금 ≥ 매매가(전세가율 100% 이상) 비율",
+     "site": 0.043,
+     "spark": 0.043,
+     "ok": true,
+     "fmt": "pct"
+    }
+   ],
+   "seconds": 18.3
+  },
+  "t2": {
+   "raw_rows": 284090,
+   "table": "t3_sale_contract (T3와 공유)",
+   "train": 210720,
+   "test": 60215,
+   "checks": [
+    {
+     "claim": "추정 시세 오차 중앙값 (sklearn → Spark MLlib GBT)",
+     "site": 0.14300000000000002,
+     "spark": 0.148,
+     "ok": true,
+     "fmt": "pct"
+    },
+    {
+     "claim": "±10% 안에 든 거래 비율",
+     "site": 0.368,
+     "spark": 0.349,
+     "ok": true,
+     "fmt": "pct"
+    },
+    {
+     "claim": "평균 오차(MAPE)",
+     "site": 0.193,
+     "spark": 0.202,
+     "ok": true,
+     "fmt": "pct"
+    }
+   ],
+   "note": "모델 구현이 달라(sklearn HistGradientBoosting vs Spark GBT) 완전히 같을 수는 없어 허용 오차를 2~3%p로 두었습니다.",
+   "seconds": 88.1
+  },
+  "t5": {
+   "raw_rows": 503023,
+   "clean_rows": 328792,
+   "csv_mb": 34.6,
+   "parquet_mb": 2.8,
+   "partitions": 26,
+   "partition_cols": [
+    "ym(연월)"
+   ],
+   "table": "t5_garak_price",
+   "query": {
+    "desc": "2026년 9월 양파 특품 가격 기록 조회",
+    "csv_s": 0.38,
+    "parquet_s": 0.11,
+    "same": true
+   },
+   "checks": [
+    {
+     "claim": "전날 값이 이월된 기록 비율 (윈도 함수 lag)",
+     "site": 0.346,
+     "spark": 0.346,
+     "ok": true,
+     "fmt": "pct"
+    },
+    {
+     "claim": "이월 값을 뺀 기록 수",
+     "site": 328792,
+     "spark": 328792,
+     "ok": true,
+     "fmt": "int"
+    },
+    {
+     "claim": "하품/특품 가격비 관측 수",
+     "site": 57019,
+     "spark": 57019,
+     "ok": true,
+     "fmt": "int"
+    }
+   ],
+   "seconds": 11.7
+  }
+ }
+}

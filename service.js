@@ -23,7 +23,7 @@ window.svc = (() => {
     if (!d) { box.innerHTML = '<div class="note">데이터를 불러오지 못했습니다.</div>'; return; }
     const gus = Object.keys(d.gu).sort((a, b) => a.localeCompare(b, "ko"));
     const ups = d.uptae;
-    box.innerHTML = `<div class="ask"><h3>직접 써보기</h3><p class="small">가게를 열려는 구와 업종을 고르세요.</p>
+    box.innerHTML = `<div class="ask"><h3>조건 고르기</h3><p class="small">가게를 열려는 구와 업종을 고르세요.</p>
       <label for="t1-gu">구</label><select id="t1-gu">${gus.map((g) => opt(g, g, g === "성북구")).join("")}</select>
       <label for="t1-up">업종</label><select id="t1-up">${ups.map((u) => opt(u, `${u} (서울 3년 폐업률 ${pct(d.seoul[u].c3)})`, u === "커피숍")).join("")}</select>
       <p class="rule"><b>판정 규칙</b><br>2019년~2023년 8월에 이 구에서 개업한 이 업종 가게의 3년 내 폐업률을 서울 같은 업종과 비교합니다. 3%p 이상 낮으면 “해볼 만한 조합”, 3%p 이상 높으면 “신중히 볼 조합”, 그 사이는 “서울 평균 수준”. 개업이 100곳 미만이거나, 원천 데이터에서 2019~2020년 개업이 앞뒤 해의 30% 미만으로 빠진 조합(업종 분류 이상 10개)은 판정하지 않습니다.<br>개업 증가율과 경쟁 수는 실제 데이터에서 폐업률과 거의 관계가 없어(상관 0.11, 0.07) 판정에 넣지 않고 참고로만 보여 줍니다.</p></div>
@@ -68,7 +68,7 @@ window.svc = (() => {
     if (!d) { box.innerHTML = '<div class="note">데이터를 불러오지 못했습니다.</div>'; return; }
     const S = d.seoul;
     const gus = Object.keys(d.gu).sort((a, b) => a.localeCompare(b, "ko"));
-    box.innerHTML = `<div class="ask"><h3>직접 써보기</h3><p class="small">전세로 들어가려는 동네를 고르세요.</p>
+    box.innerHTML = `<div class="ask"><h3>조건 고르기</h3><p class="small">전세로 들어가려는 동네를 고르세요.</p>
       <label for="t3-gu">구</label><select id="t3-gu">${gus.map((g) => opt(g, g, g === "강서구")).join("")}</select>
       <label for="t3-dong">동</label><select id="t3-dong"></select>
       <p class="rule"><b>판정 규칙</b><br>신호 세 개를 서울 평균과 비교합니다. ① 2025년 재계약 보증금 하락 비율이 서울의 1.5배 이상이면 빨강, 절반 이하면 초록 ② 전세가율 중앙값이 80% 이상이면 빨강, 60% 이하면 초록 ③ 전세가율 80% 이상 계약 비율이 서울의 1.5배 이상이면 빨강, 절반 이하면 초록. 빨강 2개 이상이면 “위험 신호가 많은 동네”. 계약이 30건 미만인 신호는 판정에서 뺍니다.</p></div>
@@ -118,7 +118,7 @@ window.svc = (() => {
     if (!d) { box.innerHTML = '<div class="note">데이터를 불러오지 못했습니다.</div>'; return; }
     const S = d.seoul;
     const gus = Object.keys(d.gu).sort((a, b) => a.localeCompare(b, "ko"));
-    box.innerHTML = `<div class="ask"><h3>직접 써보기</h3><p class="small">투자를 검토하는 구를 고르세요.</p>
+    box.innerHTML = `<div class="ask"><h3>조건 고르기</h3><p class="small">투자를 검토하는 구를 고르세요.</p>
       <label for="t2-gu">구</label><select id="t2-gu">${gus.map((g) => opt(g, g, g === "관악구")).join("")}</select>
       <p class="rule"><b>읽는 법</b><br>월세 수익률 = 연 월세 ÷ (추정 매매가 − 보증금). “실제가/추정가”는 2024–2025 거래가를 AI 추정 시세로 나눈 값을 서울 전체 치우침(1.055배)으로 보정했습니다. 1보다 작으면 추정보다 싸게 거래된 동네입니다.<br><b>후보 표시</b>: 수익률이 서울 중앙값(${S.yield_med}%) 이상이고 실제가/추정가가 1 미만. 추정 오차 중앙값이 14.3%라 개별 매물 판단에는 쓰지 마세요.</p></div>
       <div id="t2-plate" role="status" aria-live="polite"></div>`;
@@ -150,7 +150,7 @@ window.svc = (() => {
     const box = document.getElementById("t5-demo");
     if (!d) { box.innerHTML = '<div class="note">데이터를 불러오지 못했습니다.</div>'; return; }
     const items = d.items.filter((x) => x.top_price);
-    box.innerHTML = `<div class="ask"><h3>직접 써보기</h3><p class="small">가격을 알고 싶은 품목을 고르세요.</p>
+    box.innerHTML = `<div class="ask"><h3>조건 고르기</h3><p class="small">가격을 알고 싶은 품목을 고르세요.</p>
       <label for="t5-item">품목 (거래 단위)</label><select id="t5-item">${items.map((x, i) => opt(i, `${x.item} · ${x.unit}`, x.item === "양파")).join("")}</select>
       <p class="rule"><b>계산 방법</b><br>적정가 범위 = 최근 2주 특품 경락가 중앙값 × 최근 8주 하품/특품 가격비의 중간 범위(25~75%). 과거 검증에서 이 범위에 다음 주 가격비가 들어온 비율은 ${pct(d.coverage)}였습니다(${fmt(d.coverage_n)}주). 협상의 출발점으로만 쓰세요.</p></div>
       <div id="t5-plate" role="status" aria-live="polite"></div>`;

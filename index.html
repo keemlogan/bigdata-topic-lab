@@ -1,247 +1,194 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>공공 데이터 결정 도우미</title>
-<meta name="description" content="서울 공공 데이터 239만 건으로 시험한 네 가지 결정 도우미 서비스 — ITM 527 빅데이터 팀프로젝트 후보 주제">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B6E75'/%3E%3Ccircle cx='10' cy='16' r='4' fill='%23fff'/%3E%3Ccircle cx='22' cy='16' r='4' fill='%23fff' opacity='.55'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GmarketSans/GmarketSans.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<link rel="stylesheet" href="style.css">
+<meta content="서울 공공 데이터 239만 건으로 시험한 네 가지 결정 도우미 서비스 — ITM 527 빅데이터 팀프로젝트 후보 주제" name="description"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B6E75'/%3E%3Ccircle cx='10' cy='16' r='4' fill='%23fff'/%3E%3Ccircle cx='22' cy='16' r='4' fill='%23fff' opacity='.55'/%3E%3C/svg%3E" rel="icon"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/fonts-archive/GmarketSans/GmarketSans.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet"/>
 </head>
 <body>
 <a class="skip" href="#main">본문으로 건너뛰기</a>
 <header><div class="wrap">
- <div class="brand"><b>공공 데이터 결정 도우미</b><span>ITM 527 빅데이터 팀프로젝트 후보 4개 · 2026-09-27 실데이터 적재</span></div>
- <nav id="nav" aria-label="주제">
-  <a href="#home" data-s="home">처음</a>
-  <a href="#t1" data-s="t1">가게 창업 진단</a>
-  <a href="#t3" data-s="t3">빌라 전세 안심 체크</a>
-  <a href="#t2" data-s="t2">빌라 투자 동네 비교</a>
-  <a href="#t5" data-s="t5">못난이 적정가</a>
-  <a href="#sum" data-s="sum">어떤 주제를 고를까</a>
- </nav>
+<div class="brand"><b>공공 데이터 결정 도우미</b><span>ITM 527 빅데이터 팀프로젝트 후보 4개 · 2026-09-27 실데이터 적재</span></div>
+<nav aria-label="주제" id="nav">
+<a data-s="home" href="#home">주제 비교</a>
+<a data-s="t1" href="#t1">가게 창업 진단</a>
+<a data-s="t3" href="#t3">빌라 전세 안심 체크</a>
+<a data-s="t2" href="#t2">빌라 투자 동네 비교</a>
+<a data-s="t5" href="#t5">못난이 적정가</a>
+
+</nav>
 </div></header>
-
 <main class="wrap" id="main" tabindex="-1">
-
 <!-- ================================================================ 처음 -->
-<section id="home" class="hero">
- <h1>공공 데이터 <em>239만 건</em>으로<br>네 가지 결정을 도와 봤습니다</h1>
- <p>빅데이터 팀프로젝트 후보 주제 네 개를 “실제로 누가, 어떤 결정을 할 때 쓰는 서비스인가”로 바꿔, 서울 열린데이터·국토교통부 API에서 받은 실데이터로 직접 돌려 봤습니다. 주제마다 <b>직접 써보기</b>에서 조건을 고르면 결과가 나옵니다.</p>
- <ul class="svc-list">
-  <li class="hd"><span>서비스</span><span>누가 무엇을 묻나</span><span>이 서비스가 주는 답</span><span>쓴 데이터</span></li>
-  <li><a href="#t1">가게 창업 진단</a><p>예비 창업자: “이 구에서 이 업종 가게를 열어도 될까?”</p><p>그 조합의 3년 내 폐업률을 서울 같은 업종과 비교한 판정, 개업 추세·경쟁 수</p><span class="small">인허가 685,780건</span></li>
-  <li><a href="#t3">빌라 전세 안심 체크</a><p>빌라 세입자: “이 동네에 전세로 들어가도 보증금을 돌려받을 수 있을까?”</p><p>재계약 때 보증금이 내려간 비율, 전세가율을 서울 평균과 비교한 위험 신호</p><span class="small">실거래 1,200,240건</span></li>
-  <li><a href="#t2">빌라 투자 동네 비교</a><p>소형 임대 투자자: “어느 동네 빌라가 싸게 거래되고 월세 수익률이 높나?”</p><p>동네별 월세 수익률, 추정 시세 대비 거래가, 가격 변화 순위</p><span class="small">매매 270,935건</span></li>
-  <li><a href="#t5">못난이 적정가</a><p>가공업체·농가: “이번 주 하품은 얼마에 거래하는 게 적정한가?”</p><p>최근 특품 가격 × 최근 8주 등급 가격비로 계산한 하품 가격 범위</p><span class="small">경락가 328,792건</span></li>
- </ul>
- <div class="split">
-  <div><h3 style="margin-top:0">이 과제가 요구하는 것</h3><p>공공 데이터를 대량으로 모아 하둡(HDFS·Hive·Spark)에 정리하고, 요약을 넘는 분석(트렌드·예측·비교)을 한 뒤, 결과를 웹 서비스로 보여 주는 팀 과제입니다. 중간발표 <b>10월 19일(월) 14:00</b>, 최종발표 <b>12월 7일(월) 14:00</b>.</p></div>
-  <div><h3 style="margin-top:0">이 사이트의 한계</h3><p>숫자는 모두 실제로 받은 데이터에서 계산했지만, 하둡에 올리기 전 파이썬으로 먼저 돌린 <b>1차 탐색</b>입니다. 판정은 과거 통계에 규칙을 적용한 참고 지표이고, 규칙은 각 화면에 그대로 적어 두었습니다.</p></div>
- </div>
-</section>
-
+<section class="hero" id="home"><p class="crumb">ITM 527 빅데이터 팀프로젝트 · 주제 선정용</p>
+<h1>네 주제 중 하나를 골라 주세요</h1>
+<p class="lead">네 주제 모두 실제 공공 데이터를 받아 Spark까지 돌려 봤습니다. 카드 한 장이 한 주제입니다. 큰 숫자는 그 데이터에서 실제로 나온 사실이고, 누르면 서비스를 직접 써 볼 수 있습니다.</p>
+<div class="pitches" id="home-pitch"></div>
+<h2 class="part">과제 요구를 얼마나 채우나</h2><p>과제 문서와 최종 평가 항목 13개를 주제마다 확인했습니다. 저장·조회 시간·팩트체크 칸은 Spark로 실제 측정한 값입니다.</p>
+<div class="tw" id="home-matrix"></div>
+<h2 class="part">이렇게 고르면 됩니다</h2>
+<dl class="uses">
+<div><dt>과제를 안정적으로 끝내고 싶다면 · 가게 창업 진단</dt><dd>판정·지도·생존곡선·예측이 이미 작동하고 팩트체크 5개가 모두 일치합니다. 전국 295만 건으로 3일이면 확장합니다. 대신 “상권 분석”과 비슷해 보이지 않게 “3년 생존 판정”을 앞세워야 합니다.</dd></div>
+<div><dt>발표의 의미와 공감을 원한다면 · 빌라 전세 안심 체크</dt><dd>2023~24년 역전세 급증과 강서구 집중이 데이터에서 바로 보입니다. 같은 데이터로 빌라 투자 동네 비교를 두 번째 탭으로 붙이면 “세입자와 투자자 양쪽” 서비스가 됩니다.</dd></div>
+<div><dt>새로운 것을 해 보고 싶다면 · 못난이 적정가</dt><dd>지표는 가장 새롭지만 데이터가 약 2년뿐이고 3분의 1이 이월 값입니다. KAMIS 승인이 나서 30년치가 확인된 뒤 결정하는 편이 안전합니다.</dd></div>
+</dl>
+<div class="split">
+<div><h3 style="margin-top:0">과제가 요구하는 것</h3><p>공공 데이터를 대량으로 모아 하둡(HDFS·Hive·Spark)에 정리하고, 요약을 넘는 분석(추세·예측·비교)을 한 뒤, 결과를 웹 서비스로 보여 주는 팀 과제입니다. 중간발표 <b>10월 19일(월) 14:00</b>, 최종발표 <b>12월 7일(월) 14:00</b>.</p></div>
+<div><h3 style="margin-top:0">이 사이트의 범위</h3><p>수집·저장(Parquet 파티션)·Spark 분석·웹까지 이 PC에서 실제로 돌렸습니다. HDFS·Hive·Sqoop·Flume은 하둡 클러스터가 있어야 해서 실습 VM에서 할 일로 남겼습니다. 판정은 과거 통계에 공개된 규칙을 적용한 참고 지표입니다.</p></div>
+</div></section>
 <!-- ================================================================ T1 -->
-<section id="t1">
- <span class="who">예비 창업자 · 프랜차이즈 출점 담당</span>
- <h1 class="t">이 구에서 이 업종 가게를 열어도 될까</h1>
- <p class="promise">서울 음식점·카페 68만 곳의 개업·폐업 기록으로, 고른 구·업종 조합의 <b>3년 내 폐업률</b>을 서울 같은 업종 평균과 비교해 알려 줍니다.</p>
- <ol class="flow">
-  <li><b>이런 데이터로</b><p>서울 일반음식점·휴게음식점 인허가 685,780건. 가게마다 개업일·폐업일·업종·위치가 있습니다.</p></li>
-  <li><b>이렇게 예상했고</b><p>같은 업종이라도 동네에 따라 폐업률이 다르고, 개업이 몰리거나 경쟁 가게가 많은 곳은 더 많이 닫을 것이다.</p></li>
-  <li><b>이렇게 분석해서</b><p>2019년~2023년 8월에 개업한 가게가 3년 안에 닫은 비율을 구×업종별로 계산해 서울 평균과 비교했습니다.</p></li>
-  <li class="res"><b>이런 결과를 얻었고</b><p>동네 차이는 컸습니다(서울 평균보다 최대 19.5%p 낮거나 24.2%p 높음). 개업 증가율·경쟁 수는 폐업률과 거의 관계가 없었습니다.</p></li>
-  <li><b>이런 서비스가 됩니다</b><p>구와 업종을 고르면 3년 폐업률로 판정하고, 개업 추세와 경쟁 수는 참고 정보로 함께 보여 줍니다.</p></li>
- </ol>
- <div class="demo" id="t1-demo"></div>
- <h3>예상은 맞았을까</h3>
- <div class="tw"><table>
-  <tr><th>예상</th><th>실제 데이터</th><th>판정</th></tr>
-  <tr><td>동네마다 3년 폐업률이 다르다</td><td>같은 업종 안에서 구별로 서울 평균보다 최대 19.5%p 낮거나 24.2%p 높음 (개업 100곳 이상인 211개 조합)</td><td><span class="tag go">맞음</span></td></tr>
-  <tr><td>최근에 연 가게일수록 빨리 닫는다</td><td>3년 생존율: 2010–2014 개업 67.7% → 2020–2022 개업 58.8%</td><td><span class="tag go">맞음</span></td></tr>
-  <tr><td>개업이 몰리는 곳은 더 많이 닫는다</td><td>최근 3년 개업 증가율과 3년 폐업률의 순위 상관 0.11</td><td><span class="tag stop">거의 관계없음</span></td></tr>
-  <tr><td>경쟁 가게가 많으면 더 많이 닫는다</td><td>현재 영업 중인 가게 수와 3년 폐업률의 순위 상관 0.07</td><td><span class="tag stop">거의 관계없음</span></td></tr>
-  <tr><td>업종·위치 정보로 폐업을 예측할 수 있다</td><td>AUC 0.667. 모델이 위험하다고 본 상위 10%는 실제 74.2%가 3년 안에 폐업 (평균 40.8%)</td><td><span class="tag caution">어느 정도</span></td></tr>
- </table></div>
- <h3>현장에서는 이렇게 씁니다</h3>
- <dl class="uses">
-  <div><dt>창업 상담</dt><dd>상담사가 후보 입지 두세 곳의 같은 업종 폐업률을 나란히 보여 주고 선택을 돕습니다. 오픈업·소상공인 상권정보시스템이 매출을 보여 주는 자리에 “얼마나 버티나”를 더합니다.</dd></div>
-  <div><dt>소상공인 대출 심사</dt><dd>금융기관이 신청 업종·지역의 과거 3년 폐업률을 심사 참고 지표로 씁니다.</dd></div>
-  <div><dt>프랜차이즈 출점</dt><dd>점포개발팀이 폐업률이 서울 평균보다 높은 구를 1차 후보에서 걸러 냅니다.</dd></div>
- </dl>
- <h3>근거 자료</h3>
- <div class="grid" id="t1-kpi"></div>
- <div class="card"><b>500m 격자별 “3년 안에 문 닫은 비율”</b> <span class="small">2015-01~2023-08 개업, 격자당 30곳 이상만 표시</span>
-  <div id="t1-map" class="map"></div>
-  <div class="legend"><span><i style="background:#1d4ed8"></i>30% 미만</span><span><i style="background:#60a5fa"></i>30–40%</span><span><i style="background:#fbbf24"></i>40–50%</span><span><i style="background:#f97316"></i>50–60%</span><span><i style="background:#dc2626"></i>60% 이상</span><span>동그라미: 구별 3년 생존율(2015–2022 개업)</span></div>
- </div>
- <div class="card"><b>개업 시기별 생존곡선</b> <span class="small">Kaplan–Meier, 영업 중인 가게는 오늘 기준 중도절단</span><div class="chart"><canvas id="t1-km" role="img" aria-label="개업 시기별 생존곡선. 최근 개업 가게일수록 곡선이 아래에 있어 더 빨리 문을 닫았음을 보여 줌"></canvas></div></div>
- <div class="card"><b>업태별 3년 생존율</b> <span class="small">2015–2022 개업, 3,000곳 이상 업태</span><div class="chart" style="height:320px"><canvas id="t1-uptae" role="img" aria-label="업태별 3년 생존율 막대그래프. 편의점이 가장 높고 일반조리판매가 가장 낮음"></canvas></div></div>
- <div class="tw"><table id="t1-table"></table></div>
- <div class="note"><b>데이터에서 확인한 사실</b><ul id="t1-facts"></ul></div>
- <div class="note warn"><b>데이터 품질:</b> 좌표가 없는 기록 <span id="t1-xy"></span>건(약 9.4%)은 지도에서 빠집니다. 1965년 이전 개업 기록은 100건도 안 되고 1900년대 초 날짜도 섞여 있어 2005년 이후 개업만 썼습니다. 폐업인데 폐업일이 없는 31건은 제외했습니다.<br><b>업종 분류 이상:</b> 마포구는 2019~2020년 휴게음식점 인허가를 대부분 ‘기타 휴게음식점’으로 분류했습니다(그해 커피숍 개업 28곳·16곳, 앞뒤 해 174곳·246곳). 같은 식으로 2019~2020년 개업이 앞뒤 해의 30% 미만이거나 2.5배를 넘는 10개 구·업종 조합은 판정에서 뺐습니다.</div>
- <details class="course"><summary>과제 관점: 데이터를 더 모으면 · 수집 기간 · 성취도</summary><div>
-  <h4>데이터를 더 모으면 (예상)</h4>
-  <ul>
-   <li><b>전국 2,947,890건으로 확장:</b> 서울은 전국의 약 23%입니다. 전국을 받으면 약 250개 시군구로 비교가 넓어집니다. 서울 구 단위 결과는 이미 신뢰구간이 ±1~2%p라 크게 바뀌지 않을 것으로 봅니다.</li>
-   <li><b>예측 모델(AUC 0.667):</b> 양만 늘린다고 크게 오를 근거는 없습니다. 서울 상권 추정매출(481,462건)을 붙이면 “매출이 줄어든 상권” 변수가 생겨 개선 여지가 있습니다. 실제로 붙여 봐야 압니다.</li>
-  </ul>
-  <h4>발표에 쓸 문제 분석·디버깅 사례</h4>
-  <ul>
-   <li>마포구 커피숍 개업 막대가 2019~2020년에만 비어 있는 것을 화면에서 발견 → 서울 전체는 정상(2,688곳·2,519곳) → 마포구만 같은 기간 ‘기타 휴게음식점’이 315곳·343곳으로 급증 → 구청별 업종 분류 차이로 결론 → 자동 탐지 규칙(앞뒤 해 대비 30% 미만 또는 2.5배 초과)을 만들어 10개 조합을 판정에서 제외.</li>
-  </ul>
-  <h4>수집 방법과 기간</h4>
-  <div class="tw"><table>
-   <tr><th>데이터</th><th>방법</th><th>걸리는 시간</th><th>마감 안에</th></tr>
-   <tr><td>서울 인허가 68만 건</td><td>서울 열린데이터 API, 1,000행씩</td><td>실측 약 2.5분</td><td>완료</td></tr>
-   <tr><td>전국 인허가 295만 건</td><td>행안부 API, 100행씩 약 2.95만 회 (호출당 약 2.2초)</td><td>하루 10,000회 한도로 약 3일</td><td>10/19 전 가능</td></tr>
-   <tr><td>서울 상권 추정매출</td><td>서울 열린데이터 API</td><td>약 482회, 몇 분</td><td>가능</td></tr>
-  </table></div>
-  <h4>과제 성취도 (예상)</h4>
-  <div class="tw"><table>
-   <tr><th>평가 항목</th><th>지금 데이터만으로</th><th>전국·상권 매출까지 확장 시</th></tr>
-   <tr><td>데이터 규모·관리 깊이</td><td><span class="grade b">B+</span> 68만 건, 수십 년 누적. 하둡이 꼭 필요하다고 하기엔 경계선</td><td><span class="grade">A</span> 295만 건 + 매출 조인</td></tr>
-   <tr><td>분석 깊이</td><td><span class="grade">A-</span> 생존곡선·비교·예측 결과가 이미 있음</td><td><span class="grade">A</span> 매출 변화와 폐업의 시차 분석</td></tr>
-   <tr><td>차별성</td><td><span class="grade b">B</span> “상권 분석”과 비슷해 보일 위험</td><td><span class="grade b">B+</span> 생존 판정 서비스로 구분</td></tr>
-  </table></div>
- </div></details>
-</section>
-
+<section id="t1"><div id="t1-top"></div><h2 class="part" id="t1-demo-h">직접 써보기</h2><p>조건을 고르면 실데이터로 바로 판정합니다. 판정 규칙은 왼쪽에 그대로 적었습니다.</p><div class="demo" id="t1-demo"></div><h2 class="part" id="t1-fit">과제 요구를 채우나</h2><p>과제 문서의 요구와 최종 평가 항목을 이 주제에서 실제로 어디까지 했는지 적었습니다.</p><div id="t1-req"></div>
+<h3 id="t1-pipe-h">과제 요구를 전부 수행하면: 파이프라인 실측</h3><div id="t1-pipe"></div>
+<h3 id="t1-fact-h">팩트체크: 같은 숫자를 두 번 계산했습니다</h3><div id="t1-fact"></div>
+<h2 class="part" id="t1-ev">근거</h2><h3 id="t1-receipt-h">데이터 영수증</h3><div id="t1-receipt"></div><h3>분석 흐름</h3><ol class="flow">
+<li><b>이런 데이터로</b><p>서울 일반음식점·휴게음식점 인허가 685,780건. 가게마다 개업일·폐업일·업종·위치가 있습니다.</p></li>
+<li><b>이렇게 예상했고</b><p>같은 업종이라도 동네에 따라 폐업률이 다르고, 개업이 몰리거나 경쟁 가게가 많은 곳은 더 많이 닫을 것이다.</p></li>
+<li><b>이렇게 분석해서</b><p>2019년~2023년 8월에 개업한 가게가 3년 안에 닫은 비율을 구×업종별로 계산해 서울 평균과 비교했습니다.</p></li>
+<li class="res"><b>이런 결과를 얻었고</b><p>동네 차이는 컸습니다(서울 평균보다 최대 19.5%p 낮거나 24.2%p 높음). 개업 증가율·경쟁 수는 폐업률과 거의 관계가 없었습니다.</p></li>
+<li><b>이런 서비스가 됩니다</b><p>구와 업종을 고르면 3년 폐업률로 판정하고, 개업 추세와 경쟁 수는 참고 정보로 함께 보여 줍니다.</p></li>
+</ol><h3>예상은 맞았을까</h3><div class="tw"><table>
+<tr><th>예상</th><th>실제 데이터</th><th>판정</th></tr>
+<tr><td>동네마다 3년 폐업률이 다르다</td><td>같은 업종 안에서 구별로 서울 평균보다 최대 19.5%p 낮거나 24.2%p 높음 (개업 100곳 이상인 211개 조합)</td><td><span class="tag go">맞음</span></td></tr>
+<tr><td>최근에 연 가게일수록 빨리 닫는다</td><td>3년 생존율: 2010–2014 개업 67.7% → 2020–2022 개업 58.8%</td><td><span class="tag go">맞음</span></td></tr>
+<tr><td>개업이 몰리는 곳은 더 많이 닫는다</td><td>최근 3년 개업 증가율과 3년 폐업률의 순위 상관 0.11</td><td><span class="tag stop">거의 관계없음</span></td></tr>
+<tr><td>경쟁 가게가 많으면 더 많이 닫는다</td><td>현재 영업 중인 가게 수와 3년 폐업률의 순위 상관 0.07</td><td><span class="tag stop">거의 관계없음</span></td></tr>
+<tr><td>업종·위치 정보로 폐업을 예측할 수 있다</td><td>AUC 0.667. 모델이 위험하다고 본 상위 10%는 실제 74.2%가 3년 안에 폐업 (평균 40.8%)</td><td><span class="tag caution">어느 정도</span></td></tr>
+</table></div><h3>현장에서는 이렇게 씁니다</h3><dl class="uses">
+<div><dt>창업 상담</dt><dd>상담사가 후보 입지 두세 곳의 같은 업종 폐업률을 나란히 보여 주고 선택을 돕습니다. 오픈업·소상공인 상권정보시스템이 매출을 보여 주는 자리에 “얼마나 버티나”를 더합니다.</dd></div>
+<div><dt>소상공인 대출 심사</dt><dd>금융기관이 신청 업종·지역의 과거 3년 폐업률을 심사 참고 지표로 씁니다.</dd></div>
+<div><dt>프랜차이즈 출점</dt><dd>점포개발팀이 폐업률이 서울 평균보다 높은 구를 1차 후보에서 걸러 냅니다.</dd></div>
+</dl><h3>지도·차트·세부 결과</h3><div class="grid" id="t1-kpi"></div><div class="card"><b>500m 격자별 “3년 안에 문 닫은 비율”</b> <span class="small">2015-01~2023-08 개업, 격자당 30곳 이상만 표시</span>
+<div class="map" id="t1-map"></div>
+<div class="legend"><span><i style="background:#1d4ed8"></i>30% 미만</span><span><i style="background:#60a5fa"></i>30–40%</span><span><i style="background:#fbbf24"></i>40–50%</span><span><i style="background:#f97316"></i>50–60%</span><span><i style="background:#dc2626"></i>60% 이상</span><span>동그라미: 구별 3년 생존율(2015–2022 개업)</span></div>
+</div><div class="card"><b>개업 시기별 생존곡선</b> <span class="small">Kaplan–Meier, 영업 중인 가게는 오늘 기준 중도절단</span><div class="chart"><canvas aria-label="개업 시기별 생존곡선. 최근 개업 가게일수록 곡선이 아래에 있어 더 빨리 문을 닫았음을 보여 줌" id="t1-km" role="img"></canvas></div></div><div class="card"><b>업태별 3년 생존율</b> <span class="small">2015–2022 개업, 3,000곳 이상 업태</span><div class="chart" style="height:320px"><canvas aria-label="업태별 3년 생존율 막대그래프. 편의점이 가장 높고 일반조리판매가 가장 낮음" id="t1-uptae" role="img"></canvas></div></div><div class="tw"><table id="t1-table"></table></div><div class="note"><b>데이터에서 확인한 사실</b><ul id="t1-facts"></ul></div><div class="note warn"><b>데이터 품질:</b> 좌표가 없는 기록 <span id="t1-xy"></span>건(약 9.4%)은 지도에서 빠집니다. 1965년 이전 개업 기록은 100건도 안 되고 1900년대 초 날짜도 섞여 있어 2005년 이후 개업만 썼습니다. 폐업인데 폐업일이 없는 31건은 제외했습니다.<br/><b>업종 분류 이상:</b> 마포구는 2019~2020년 휴게음식점 인허가를 대부분 ‘기타 휴게음식점’으로 분류했습니다(그해 커피숍 개업 28곳·16곳, 앞뒤 해 174곳·246곳). 같은 식으로 2019~2020년 개업이 앞뒤 해의 30% 미만이거나 2.5배를 넘는 10개 구·업종 조합은 판정에서 뺐습니다.</div><details class="course"><summary>과제 관점: 데이터를 더 모으면 · 수집 기간 · 성취도</summary><div>
+<h4>데이터를 더 모으면 (예상)</h4>
+<ul>
+<li><b>전국 2,947,890건으로 확장:</b> 서울은 전국의 약 23%입니다. 전국을 받으면 약 250개 시군구로 비교가 넓어집니다. 서울 구 단위 결과는 이미 신뢰구간이 ±1~2%p라 크게 바뀌지 않을 것으로 봅니다.</li>
+<li><b>예측 모델(AUC 0.667):</b> 양만 늘린다고 크게 오를 근거는 없습니다. 서울 상권 추정매출(481,462건)을 붙이면 “매출이 줄어든 상권” 변수가 생겨 개선 여지가 있습니다. 실제로 붙여 봐야 압니다.</li>
+</ul>
+<h4>발표에 쓸 문제 분석·디버깅 사례</h4>
+<ul>
+<li>마포구 커피숍 개업 막대가 2019~2020년에만 비어 있는 것을 화면에서 발견 → 서울 전체는 정상(2,688곳·2,519곳) → 마포구만 같은 기간 ‘기타 휴게음식점’이 315곳·343곳으로 급증 → 구청별 업종 분류 차이로 결론 → 자동 탐지 규칙(앞뒤 해 대비 30% 미만 또는 2.5배 초과)을 만들어 10개 조합을 판정에서 제외.</li>
+</ul>
+<h4>수집 방법과 기간</h4>
+<div class="tw"><table>
+<tr><th>데이터</th><th>방법</th><th>걸리는 시간</th><th>마감 안에</th></tr>
+<tr><td>서울 인허가 68만 건</td><td>서울 열린데이터 API, 1,000행씩</td><td>실측 약 2.5분</td><td>완료</td></tr>
+<tr><td>전국 인허가 295만 건</td><td>행안부 API, 100행씩 약 2.95만 회 (호출당 약 2.2초)</td><td>하루 10,000회 한도로 약 3일</td><td>10/19 전 가능</td></tr>
+<tr><td>서울 상권 추정매출</td><td>서울 열린데이터 API</td><td>약 482회, 몇 분</td><td>가능</td></tr>
+</table></div>
+<h4>과제 성취도 (예상)</h4>
+<div class="tw"><table>
+<tr><th>평가 항목</th><th>지금 데이터만으로</th><th>전국·상권 매출까지 확장 시</th></tr>
+<tr><td>데이터 규모·관리 깊이</td><td><span class="grade b">B+</span> 68만 건, 수십 년 누적. 하둡이 꼭 필요하다고 하기엔 경계선</td><td><span class="grade">A</span> 295만 건 + 매출 조인</td></tr>
+<tr><td>분석 깊이</td><td><span class="grade">A-</span> 생존곡선·비교·예측 결과가 이미 있음</td><td><span class="grade">A</span> 매출 변화와 폐업의 시차 분석</td></tr>
+<tr><td>차별성</td><td><span class="grade b">B</span> “상권 분석”과 비슷해 보일 위험</td><td><span class="grade b">B+</span> 생존 판정 서비스로 구분</td></tr>
+</table></div>
+</div></details></section>
 <!-- ================================================================ T3 -->
-<section id="t3">
- <span class="who">빌라 전세 세입자 · 공인중개사</span>
- <h1 class="t">이 동네 빌라에 전세로 들어가도 될까</h1>
- <p class="promise">서울 빌라 전월세·매매 실거래 120만 건으로, 고른 동네의 <b>재계약 보증금 하락(역전세)</b>과 <b>전세가율</b>을 서울 평균과 비교해 계약 전에 보여 줍니다.</p>
- <ol class="flow">
-  <li><b>이런 데이터로</b><p>국토교통부 실거래: 서울 연립다세대 전월세 916,150건, 매매 284,090건 (2019–2025).</p></li>
-  <li><b>이렇게 예상했고</b><p>집값이 꺾인 시기에는 재계약 때 보증금을 내려야 하는 역전세가 늘고, 전세 피해가 컸던 지역에서 더 심할 것이다.</p></li>
-  <li><b>이렇게 분석해서</b><p>갱신 전세의 종전 보증금과 새 보증금을 비교해 ‘보증금이 내려간 비율’을 구·동별로 계산하고, 같은 건물 매매가로 전세가율을 구했습니다.</p></li>
-  <li class="res"><b>이런 결과를 얻었고</b><p>보증금 하락 비율이 2022년 1.2%에서 2023년 21.5%, 2024년 23.3%로 뛰었고, 2025년 강서구는 40.1%로 서울(11.5%)의 3.5배였습니다.</p></li>
-  <li><b>이런 서비스가 됩니다</b><p>동네를 고르면 세 가지 위험 신호를 서울 평균과 비교한 판정으로 보여 줍니다.</p></li>
- </ol>
- <div class="demo" id="t3-demo"></div>
- <h3>예상은 맞았을까</h3>
- <div class="tw"><table>
-  <tr><th>예상</th><th>실제 데이터</th><th>판정</th></tr>
-  <tr><td>집값이 꺾이면 역전세가 늘어난다</td><td>갱신 전세 중 보증금 하락: 2022년 1.2% → 2023년 21.5% → 2024년 23.3% → 2025년 11.5%</td><td><span class="tag go">맞음</span></td></tr>
-  <tr><td>전세 피해가 컸던 지역에서 더 심하다</td><td>2025년 강서구 40.1%(화곡동 49.9%), 구로구 29.0%, 도봉구 25.0% · 서울 11.5%</td><td><span class="tag go">맞음</span></td></tr>
-  <tr><td>보증금이 매매가에 육박하는 계약이 많다</td><td>같은 건물 매매가를 찾은 69,268건 중 전세가율 80% 이상 23.8%, 100% 이상 4.3%</td><td><span class="tag caution">일부 맞음</span></td></tr>
-  <tr><td>모든 계약의 보증금 변화를 볼 수 있다</td><td>종전 보증금은 갱신 계약에만, 2021년 이후에만 기록됨</td><td><span class="tag stop">틀림 (한계)</span></td></tr>
- </table></div>
- <h3>현장에서는 이렇게 씁니다</h3>
- <dl class="uses">
-  <div><dt>세입자의 계약 전 확인</dt><dd>계약하려는 동네의 역전세 신호가 서울 평균보다 높으면 전세보증보험 가입 여부와 등기부를 더 꼼꼼히 확인합니다.</dd></div>
-  <div><dt>공인중개사 설명 자료</dt><dd>중개사가 동네의 보증금 하락 추세를 근거로 적정 보증금 수준을 설명합니다.</dd></div>
-  <div><dt>지자체 전세피해 예방</dt><dd>역전세 신호가 강한 동을 골라 상담·홍보를 먼저 배치합니다.</dd></div>
- </dl>
- <h3>근거 자료</h3>
- <div id="t3-evidence"><div class="note">데이터를 불러오는 중입니다.</div></div>
- <details class="course"><summary>과제 관점: 데이터를 더 모으면 · 수집 기간 · 성취도</summary><div id="t3-course"></div></details>
-</section>
-
+<section id="t3"><div id="t3-top"></div><h2 class="part" id="t3-demo-h">직접 써보기</h2><p>조건을 고르면 실데이터로 바로 판정합니다. 판정 규칙은 왼쪽에 그대로 적었습니다.</p><div class="demo" id="t3-demo"></div><div class="card concept"><b>두 가지 위험을 따로 봅니다</b>
+<div class="split" style="margin-top:10px">
+<div><p><b>깡통전세</b> · 보증금이 <b>집값(매매가)</b>에 가깝거나 더 큰 상태. 집을 팔아도 보증금을 다 갚을 수 없습니다.<br/><span class="small">예: 매매가 2억 원 빌라에 보증금 1억 9천만 원(전세가율 95%). 집값이 1억 8천만 원으로 떨어지면 팔아도 모자랍니다.</span><br/>→ 이 서비스의 <b>전세가율</b> 신호 (보증금 ÷ 같은 건물 매매가)</p></div>
+<div><p><b>역전세</b> · 지금 <b>전세 시세</b>가 2년 전 보증금보다 낮아진 상태. 집주인은 새 세입자에게 덜 받으니 차액을 따로 마련해야 합니다.<br/><span class="small">예: 2년 전 보증금 2억 원, 지금 시세 1억 6천만 원. 집주인이 4천만 원을 마련하지 못하면 반환이 늦어집니다.</span><br/>→ 이 서비스의 <b>재계약 보증금 하락</b> 신호 (갱신 계약의 종전 보증금과 새 보증금 비교)</p></div>
+</div>
+<p class="small" style="margin:8px 0 0">보증금이 내려간 재계약은 대개 집주인이 차액을 이미 돌려준 경우라, 이 비율은 “이 세입자가 돈을 못 받았다”가 아니라 “이 동네 전세 시세가 떨어지고 있다”는 시장 신호로 읽어야 합니다.</p></div><h2 class="part" id="t3-fit">과제 요구를 채우나</h2><p>과제 문서의 요구와 최종 평가 항목을 이 주제에서 실제로 어디까지 했는지 적었습니다.</p><div id="t3-req"></div>
+<h3 id="t3-pipe-h">과제 요구를 전부 수행하면: 파이프라인 실측</h3><div id="t3-pipe"></div>
+<h3 id="t3-fact-h">팩트체크: 같은 숫자를 두 번 계산했습니다</h3><div id="t3-fact"></div>
+<h2 class="part" id="t3-ev">근거</h2><h3 id="t3-receipt-h">데이터 영수증</h3><div id="t3-receipt"></div><h3>분석 흐름</h3><ol class="flow">
+<li><b>이런 데이터로</b><p>국토교통부 실거래: 서울 연립다세대 전월세 916,150건, 매매 284,090건 (2019–2025).</p></li>
+<li><b>이렇게 예상했고</b><p>집값이 꺾인 시기에는 재계약 때 보증금을 내려야 하는 역전세가 늘고, 전세 피해가 컸던 지역에서 더 심할 것이다.</p></li>
+<li><b>이렇게 분석해서</b><p>갱신 전세의 종전 보증금과 새 보증금을 비교해 ‘보증금이 내려간 비율’을 구·동별로 계산하고, 같은 건물 매매가로 전세가율을 구했습니다.</p></li>
+<li class="res"><b>이런 결과를 얻었고</b><p>보증금 하락 비율이 2022년 1.2%에서 2023년 21.5%, 2024년 23.3%로 뛰었고, 2025년 강서구는 40.1%로 서울(11.5%)의 3.5배였습니다.</p></li>
+<li><b>이런 서비스가 됩니다</b><p>동네를 고르면 세 가지 위험 신호를 서울 평균과 비교한 판정으로 보여 줍니다.</p></li>
+</ol><h3>예상은 맞았을까</h3><div class="tw"><table>
+<tr><th>예상</th><th>실제 데이터</th><th>판정</th></tr>
+<tr><td>집값이 꺾이면 역전세가 늘어난다</td><td>갱신 전세 중 보증금 하락: 2022년 1.2% → 2023년 21.5% → 2024년 23.3% → 2025년 11.5%</td><td><span class="tag go">맞음</span></td></tr>
+<tr><td>전세 피해가 컸던 지역에서 더 심하다</td><td>2025년 강서구 40.1%(화곡동 49.9%), 구로구 29.0%, 도봉구 25.0% · 서울 11.5%</td><td><span class="tag go">맞음</span></td></tr>
+<tr><td>보증금이 매매가에 육박하는 계약이 많다</td><td>같은 건물 매매가를 찾은 69,268건 중 전세가율 80% 이상 23.8%, 100% 이상 4.3%</td><td><span class="tag caution">일부 맞음</span></td></tr>
+<tr><td>모든 계약의 보증금 변화를 볼 수 있다</td><td>종전 보증금은 갱신 계약에만, 2021년 이후에만 기록됨</td><td><span class="tag stop">틀림 (한계)</span></td></tr>
+</table></div><h3>현장에서는 이렇게 씁니다</h3><dl class="uses">
+<div><dt>세입자의 계약 전 확인</dt><dd>계약하려는 동네의 역전세 신호가 서울 평균보다 높으면 전세보증보험 가입 여부와 등기부를 더 꼼꼼히 확인합니다.</dd></div>
+<div><dt>공인중개사 설명 자료</dt><dd>중개사가 동네의 보증금 하락 추세를 근거로 적정 보증금 수준을 설명합니다.</dd></div>
+<div><dt>지자체 전세피해 예방</dt><dd>역전세 신호가 강한 동을 골라 상담·홍보를 먼저 배치합니다.</dd></div>
+</dl><h3>지도·차트·세부 결과</h3><div id="t3-evidence"><div class="note">데이터를 불러오는 중입니다.</div></div><details class="course"><summary>과제 관점: 데이터를 더 모으면 · 수집 기간 · 성취도</summary><div id="t3-course"></div></details></section>
 <!-- ================================================================ T2 -->
-<section id="t2">
- <span class="who">소형 임대 투자자 · 자산관리 상담</span>
- <h1 class="t">어느 동네 빌라가 싸게 거래되고 월세가 잘 나올까</h1>
- <p class="promise">같은 빌라 실거래로 AI 추정 시세를 만들고, 동네별 <b>월세 수익률</b>과 <b>추정 시세 대비 거래가</b>를 순위로 보여 줘 투자 후보 동네를 좁힙니다.</p>
- <ol class="flow">
-  <li><b>이런 데이터로</b><p>서울 연립다세대 매매 270,935건(해제 거래 제외)과 2024–2025 월세 계약.</p></li>
-  <li><b>이렇게 예상했고</b><p>동네·면적·연식·층으로 빌라 시세를 ±10% 안으로 추정할 수 있고, 싸게 거래되는 동네와 수익률 높은 동네가 따로 있을 것이다.</p></li>
-  <li><b>이렇게 분석해서</b><p>2019–2023 거래로 추정 시세 모델을 학습해 2024–2025 거래로 검증하고, 동네별 실제가/추정가와 월세 수익률을 계산했습니다.</p></li>
-  <li class="res"><b>이런 결과를 얻었고</b><p>시세 추정은 오차 중앙값 14.3%로 개별 매물 판정에는 부족했습니다. 동네별 월세 수익률은 0.94%~6.67%로 차이가 뚜렷했습니다.</p></li>
-  <li><b>이런 서비스가 됩니다</b><p>구를 고르면 동네별 수익률·거래가 수준·가격 변화를 순위로 보여 줍니다. 판정이 아닌 비교 도구입니다.</p></li>
- </ol>
- <div class="demo" id="t2-demo"></div>
- <h3>예상은 맞았을까</h3>
- <div class="tw"><table>
-  <tr><th>예상</th><th>실제 데이터</th><th>판정</th></tr>
-  <tr><td>빌라 시세를 ±10% 안으로 추정할 수 있다</td><td>2024–2025 거래 60,215건 중 ±10% 안 36.8%, 오차 중앙값 14.3%</td><td><span class="tag stop">틀림</span></td></tr>
-  <tr><td>추정가보다 싸게 거래되는 동네가 따로 있다</td><td>거래 50건 이상인 163개 동의 실제가/추정가(서울 기준 보정)가 0.78~1.63배로 퍼져 있음</td><td><span class="tag go">맞음</span></td></tr>
-  <tr><td>동네마다 월세 수익률이 다르다</td><td>월세 50건 이상인 168개 동의 수익률 0.94%~6.67% (하위 10% 1.66%, 상위 10% 4.44%)</td><td><span class="tag go">맞음</span></td></tr>
- </table></div>
- <h3>현장에서는 이렇게 씁니다</h3>
- <dl class="uses">
-  <div><dt>투자 후보 동네 좁히기</dt><dd>투자자가 예산에 맞는 구에서 수익률 상위 동네 몇 곳만 골라 현장 임장을 갑니다.</dd></div>
-  <div><dt>자산관리 상담</dt><dd>은행 PB가 고객에게 동네별 월세 수익률 분포를 근거로 기대 수익을 설명합니다.</dd></div>
-  <div><dt>전세 안심 체크와 한 화면으로</dt><dd>같은 데이터라 “세입자 탭(전세 안심)”과 “투자자 탭”을 한 서비스에 붙일 수 있습니다.</dd></div>
- </dl>
- <h3>근거 자료</h3>
- <div id="t2-evidence"><div class="note">데이터를 불러오는 중입니다.</div></div>
- <details class="course"><summary>과제 관점: 데이터를 더 모으면 · 수집 기간 · 성취도</summary><div id="t2-course"></div></details>
-</section>
-
+<section id="t2"><div id="t2-top"></div><h2 class="part" id="t2-demo-h">직접 써보기</h2><p>조건을 고르면 실데이터로 바로 판정합니다. 판정 규칙은 왼쪽에 그대로 적었습니다.</p><div class="demo" id="t2-demo"></div><div class="card concept"><b>월세 수익률은 이렇게 계산한 추정값입니다</b>
+<p style="margin:8px 0 6px">월세 수익률 = 월세 × 12 ÷ (추정 매매가 − 보증금). 예: 보증금 1,000만 원, 월세 50만 원, 추정 매매가 2억 원 → 600만 원 ÷ 1억 9,000만 원 ≈ 3.2%.</p>
+<ul class="small" style="margin:0"><li><b>월세·보증금은 실제 신고된 계약 값</b>, 매매가는 같은 건물 다른 호실의 ㎡당 거래가로 추정한 값입니다. 같은 건물 매매가 없으면 계산하지 않았습니다.</li><li>취득세·재산세·관리비·수리비·공실·대출 이자를 빼지 않은 <b>총수익률</b>입니다. 실제 손에 쥐는 수익률은 더 낮습니다.</li><li>누가 얼마에 사서 얼마를 벌었는지 기록한 공개 데이터는 없습니다. 매매와 임대 거래를 같은 건물에서 짝지어 “이 정도 수익률이 나오는 구조”를 추정한 것입니다.</li></ul></div><h2 class="part" id="t2-fit">과제 요구를 채우나</h2><p>과제 문서의 요구와 최종 평가 항목을 이 주제에서 실제로 어디까지 했는지 적었습니다.</p><div id="t2-req"></div>
+<h3 id="t2-pipe-h">과제 요구를 전부 수행하면: 파이프라인 실측</h3><div id="t2-pipe"></div>
+<h3 id="t2-fact-h">팩트체크: 같은 숫자를 두 번 계산했습니다</h3><div id="t2-fact"></div>
+<h2 class="part" id="t2-ev">근거</h2><h3 id="t2-receipt-h">데이터 영수증</h3><div id="t2-receipt"></div><h3>분석 흐름</h3><ol class="flow">
+<li><b>이런 데이터로</b><p>서울 연립다세대 매매 270,935건(해제 거래 제외)과 2024–2025 월세 계약.</p></li>
+<li><b>이렇게 예상했고</b><p>동네·면적·연식·층으로 빌라 시세를 ±10% 안으로 추정할 수 있고, 싸게 거래되는 동네와 수익률 높은 동네가 따로 있을 것이다.</p></li>
+<li><b>이렇게 분석해서</b><p>2019–2023 거래로 추정 시세 모델을 학습해 2024–2025 거래로 검증하고, 동네별 실제가/추정가와 월세 수익률을 계산했습니다.</p></li>
+<li class="res"><b>이런 결과를 얻었고</b><p>시세 추정은 오차 중앙값 14.3%로 개별 매물 판정에는 부족했습니다. 동네별 월세 수익률은 0.94%~6.67%로 차이가 뚜렷했습니다.</p></li>
+<li><b>이런 서비스가 됩니다</b><p>구를 고르면 동네별 수익률·거래가 수준·가격 변화를 순위로 보여 줍니다. 판정이 아닌 비교 도구입니다.</p></li>
+</ol><h3>예상은 맞았을까</h3><div class="tw"><table>
+<tr><th>예상</th><th>실제 데이터</th><th>판정</th></tr>
+<tr><td>빌라 시세를 ±10% 안으로 추정할 수 있다</td><td>2024–2025 거래 60,215건 중 ±10% 안 36.8%, 오차 중앙값 14.3%</td><td><span class="tag stop">틀림</span></td></tr>
+<tr><td>추정가보다 싸게 거래되는 동네가 따로 있다</td><td>거래 50건 이상인 163개 동의 실제가/추정가(서울 기준 보정)가 0.78~1.63배로 퍼져 있음</td><td><span class="tag go">맞음</span></td></tr>
+<tr><td>동네마다 월세 수익률이 다르다</td><td>월세 50건 이상인 168개 동의 수익률 0.94%~6.67% (하위 10% 1.66%, 상위 10% 4.44%)</td><td><span class="tag go">맞음</span></td></tr>
+</table></div><h3>현장에서는 이렇게 씁니다</h3><dl class="uses">
+<div><dt>투자 후보 동네 좁히기</dt><dd>투자자가 예산에 맞는 구에서 수익률 상위 동네 몇 곳만 골라 현장 임장을 갑니다.</dd></div>
+<div><dt>자산관리 상담</dt><dd>은행 PB가 고객에게 동네별 월세 수익률 분포를 근거로 기대 수익을 설명합니다.</dd></div>
+<div><dt>전세 안심 체크와 한 화면으로</dt><dd>같은 데이터라 “세입자 탭(전세 안심)”과 “투자자 탭”을 한 서비스에 붙일 수 있습니다.</dd></div>
+</dl><h3>지도·차트·세부 결과</h3><div id="t2-evidence"><div class="note">데이터를 불러오는 중입니다.</div></div><details class="course"><summary>과제 관점: 데이터를 더 모으면 · 수집 기간 · 성취도</summary><div id="t2-course"></div></details></section>
 <!-- ================================================================ T5 -->
-<section id="t5">
- <span class="who">식품 가공업체 · 급식 구매팀 · 농가</span>
- <h1 class="t">이번 주 못난이 농산물은 얼마가 적정할까</h1>
- <p class="promise">가락시장 등급별 경락가로 품목마다 <b>하품 가격이 특품 가격의 몇 %인지</b> 계산해, 최근 특품 가격에서 하품 적정가 범위를 뽑아 줍니다.</p>
- <ol class="flow">
-  <li><b>이런 데이터로</b><p>서울 가락시장 품목·등급별 경락가 503,023건. 전날 값을 그대로 이월한 34.6%를 빼고 328,792건을 썼습니다.</p></li>
-  <li><b>이렇게 예상했고</b><p>하품(못난이)은 특품 가격의 일정한 비율로 거래될 것이다.</p></li>
-  <li><b>이렇게 분석해서</b><p>품목·단위별 하품/특품 가격비의 분포와 주간 변화를 계산하고, 최근 8주 범위가 다음 주 값을 얼마나 맞히는지 검증했습니다.</p></li>
-  <li class="res"><b>이런 결과를 얻었고</b><p>비율은 품목마다 약 28%~60%로 달랐고 같은 품목도 크게 흔들렸습니다. 최근 8주 중간 범위에 다음 주 값이 들어온 경우는 32%뿐이었습니다.</p></li>
-  <li><b>이런 서비스가 됩니다</b><p>품목을 고르면 하품 적정가 범위를 보여 줍니다. 지금 정확도로는 협상의 출발점 수준입니다.</p></li>
- </ol>
- <div class="demo" id="t5-demo"></div>
- <h3>예상은 맞았을까</h3>
- <div class="tw"><table>
-  <tr><th>예상</th><th>실제 데이터</th><th>판정</th></tr>
-  <tr><td>하품은 특품의 일정한 비율로 거래된다</td><td>품목별 평균 가격비 생표고 28.0% ~ 양파 60.4%, 같은 품목 안 표준편차 약 9~22%p</td><td><span class="tag stop">틀림</span></td></tr>
-  <tr><td>최근 흐름으로 다음 주 가격비를 맞힐 수 있다</td><td>최근 8주 중간 범위(25~75%)에 다음 주 값이 들어온 비율 32.2% (7,792주 검증). “지난주 그대로” 예측 오차 16.1%</td><td><span class="tag caution">약함</span></td></tr>
-  <tr><td>시장 데이터를 그대로 믿을 수 있다</td><td>기록의 34.6%가 전날과 같은 값(거래 없는 날 이월로 추정)</td><td><span class="tag stop">정제 필요</span></td></tr>
- </table></div>
- <h3>현장에서는 이렇게 씁니다</h3>
- <dl class="uses">
-  <div><dt>선도계약 협상</dt><dd>가공업체와 농가가 “특품 시세의 몇 %”라는 출발점을 놓고 가격을 정합니다. 에스앤이컴퍼니의 못난이 선도거래와 같은 자리입니다.</dd></div>
-  <div><dt>급식·외식 구매</dt><dd>구매팀이 하품 발주 단가가 최근 시장 범위 안에 있는지 확인합니다.</dd></div>
-  <div><dt>농가 출하 판단</dt><dd>농가가 하품을 시장에 낼지 가공용으로 팔지 비교합니다.</dd></div>
- </dl>
- <h3>근거 자료</h3>
- <div class="grid" id="t5-kpi"></div>
- <div class="card"><b>품목별 하품/특품 가격비 (주 평균)</b> <span class="small">이월 값 제외</span> <select id="t5-sel" aria-label="품목" style="width:auto;margin-inline-start:8px"></select><div class="chart"><canvas id="t5-chart" role="img" aria-label="선택한 품목의 주별 하품/특품 가격비 선그래프"></canvas></div></div>
- <div class="card"><b>관측이 많은 품목 20개</b><div class="tw" style="box-shadow:none"><table id="t5-table"></table></div></div>
- <div class="note"><b>데이터에서 확인한 사실</b><ul id="t5-facts"></ul></div>
- <details class="course"><summary>과제 관점: 데이터를 더 모으면 · 수집 기간 · 성취도</summary><div>
-  <h4>데이터를 더 모으면 (예상)</h4>
-  <ul>
-   <li><b>지금은 약 2년뿐</b>이라 계절 패턴을 두 번밖에 못 봅니다.</li>
-   <li><b>KAMIS가 발급되면</b> 1996년부터의 도·소매 가격(공식 안내 기준)으로 계절성과 장기 추세를 학습할 수 있습니다. 같은 등급 구분과 이월 문제 여부는 아직 확인하지 못했습니다.</li>
-   <li><b>aT 전국 경매</b>(하루 11~15만 건)는 최근 약 한 달치만 남아 있어, 지금부터 쌓아도 마감까지 2~3개월치입니다.</li>
-  </ul>
-  <h4>수집 방법과 기간</h4>
-  <div class="tw"><table>
-   <tr><th>데이터</th><th>방법</th><th>걸리는 시간</th><th>마감 안에</th></tr>
-   <tr><td>가락 등급별 가격 50만 건</td><td>서울 열린데이터 API</td><td>실측 약 40초</td><td>완료</td></tr>
-   <tr><td>KAMIS 30년</td><td>KAMIS Open API (승인 대기)</td><td>규모 미확인</td><td>승인 시점에 달림</td></tr>
-   <tr><td>aT 전국 경매</td><td>매일 수집해 누적</td><td>마감까지 2~3개월치</td><td>누적 기간 짧음</td></tr>
-  </table></div>
-  <h4>과제 성취도 (예상)</h4>
-  <div class="tw"><table>
-   <tr><th>평가 항목</th><th>지금 데이터만으로</th><th>KAMIS 확인 시</th></tr>
-   <tr><td>데이터 규모·관리</td><td><span class="grade c">C+</span> 쓸 수 있는 기록 33만 건</td><td><span class="grade b">B+</span></td></tr>
-   <tr><td>분석 깊이</td><td><span class="grade b">B</span> 가격비와 예측 기준선</td><td><span class="grade">A-</span></td></tr>
-   <tr><td>차별성·사업성</td><td colspan="2"><span class="grade">A</span> 못난이 적정가라는 새 지표</td></tr>
-  </table></div>
- </div></details>
-</section>
-
+<section id="t5"><div id="t5-top"></div><h2 class="part" id="t5-demo-h">직접 써보기</h2><p>조건을 고르면 실데이터로 바로 판정합니다. 판정 규칙은 왼쪽에 그대로 적었습니다.</p><div class="demo" id="t5-demo"></div><h2 class="part" id="t5-fit">과제 요구를 채우나</h2><p>과제 문서의 요구와 최종 평가 항목을 이 주제에서 실제로 어디까지 했는지 적었습니다.</p><div id="t5-req"></div>
+<h3 id="t5-pipe-h">과제 요구를 전부 수행하면: 파이프라인 실측</h3><div id="t5-pipe"></div>
+<h3 id="t5-fact-h">팩트체크: 같은 숫자를 두 번 계산했습니다</h3><div id="t5-fact"></div>
+<h2 class="part" id="t5-ev">근거</h2><h3 id="t5-receipt-h">데이터 영수증</h3><div id="t5-receipt"></div><h3>분석 흐름</h3><ol class="flow">
+<li><b>이런 데이터로</b><p>서울 가락시장 품목·등급별 경락가 503,023건. 전날 값을 그대로 이월한 34.6%를 빼고 328,792건을 썼습니다.</p></li>
+<li><b>이렇게 예상했고</b><p>하품(못난이)은 특품 가격의 일정한 비율로 거래될 것이다.</p></li>
+<li><b>이렇게 분석해서</b><p>품목·단위별 하품/특품 가격비의 분포와 주간 변화를 계산하고, 최근 8주 범위가 다음 주 값을 얼마나 맞히는지 검증했습니다.</p></li>
+<li class="res"><b>이런 결과를 얻었고</b><p>비율은 품목마다 약 28%~60%로 달랐고 같은 품목도 크게 흔들렸습니다. 최근 8주 중간 범위에 다음 주 값이 들어온 경우는 32%뿐이었습니다.</p></li>
+<li><b>이런 서비스가 됩니다</b><p>품목을 고르면 하품 적정가 범위를 보여 줍니다. 지금 정확도로는 협상의 출발점 수준입니다.</p></li>
+</ol><h3>예상은 맞았을까</h3><div class="tw"><table>
+<tr><th>예상</th><th>실제 데이터</th><th>판정</th></tr>
+<tr><td>하품은 특품의 일정한 비율로 거래된다</td><td>품목별 평균 가격비 생표고 28.0% ~ 양파 60.4%, 같은 품목 안 표준편차 약 9~22%p</td><td><span class="tag stop">틀림</span></td></tr>
+<tr><td>최근 흐름으로 다음 주 가격비를 맞힐 수 있다</td><td>최근 8주 중간 범위(25~75%)에 다음 주 값이 들어온 비율 32.2% (7,792주 검증). “지난주 그대로” 예측 오차 16.1%</td><td><span class="tag caution">약함</span></td></tr>
+<tr><td>시장 데이터를 그대로 믿을 수 있다</td><td>기록의 34.6%가 전날과 같은 값(거래 없는 날 이월로 추정)</td><td><span class="tag stop">정제 필요</span></td></tr>
+</table></div><h3>현장에서는 이렇게 씁니다</h3><dl class="uses">
+<div><dt>선도계약 협상</dt><dd>가공업체와 농가가 “특품 시세의 몇 %”라는 출발점을 놓고 가격을 정합니다. 에스앤이컴퍼니의 못난이 선도거래와 같은 자리입니다.</dd></div>
+<div><dt>급식·외식 구매</dt><dd>구매팀이 하품 발주 단가가 최근 시장 범위 안에 있는지 확인합니다.</dd></div>
+<div><dt>농가 출하 판단</dt><dd>농가가 하품을 시장에 낼지 가공용으로 팔지 비교합니다.</dd></div>
+</dl><h3>지도·차트·세부 결과</h3><div class="grid" id="t5-kpi"></div><div class="card"><b>품목별 하품/특품 가격비 (주 평균)</b> <span class="small">이월 값 제외</span> <select aria-label="품목" id="t5-sel" style="width:auto;margin-inline-start:8px"></select><div class="chart"><canvas aria-label="선택한 품목의 주별 하품/특품 가격비 선그래프" id="t5-chart" role="img"></canvas></div></div><div class="card"><b>관측이 많은 품목 20개</b><div class="tw" style="box-shadow:none"><table id="t5-table"></table></div></div><div class="note"><b>데이터에서 확인한 사실</b><ul id="t5-facts"></ul></div><details class="course"><summary>과제 관점: 데이터를 더 모으면 · 수집 기간 · 성취도</summary><div>
+<h4>데이터를 더 모으면 (예상)</h4>
+<ul>
+<li><b>지금은 약 2년뿐</b>이라 계절 패턴을 두 번밖에 못 봅니다.</li>
+<li><b>KAMIS가 발급되면</b> 1996년부터의 도·소매 가격(공식 안내 기준)으로 계절성과 장기 추세를 학습할 수 있습니다. 같은 등급 구분과 이월 문제 여부는 아직 확인하지 못했습니다.</li>
+<li><b>aT 전국 경매</b>(하루 11~15만 건)는 최근 약 한 달치만 남아 있어, 지금부터 쌓아도 마감까지 2~3개월치입니다.</li>
+</ul>
+<h4>수집 방법과 기간</h4>
+<div class="tw"><table>
+<tr><th>데이터</th><th>방법</th><th>걸리는 시간</th><th>마감 안에</th></tr>
+<tr><td>가락 등급별 가격 50만 건</td><td>서울 열린데이터 API</td><td>실측 약 40초</td><td>완료</td></tr>
+<tr><td>KAMIS 30년</td><td>KAMIS Open API (승인 대기)</td><td>규모 미확인</td><td>승인 시점에 달림</td></tr>
+<tr><td>aT 전국 경매</td><td>매일 수집해 누적</td><td>마감까지 2~3개월치</td><td>누적 기간 짧음</td></tr>
+</table></div>
+<h4>과제 성취도 (예상)</h4>
+<div class="tw"><table>
+<tr><th>평가 항목</th><th>지금 데이터만으로</th><th>KAMIS 확인 시</th></tr>
+<tr><td>데이터 규모·관리</td><td><span class="grade c">C+</span> 쓸 수 있는 기록 33만 건</td><td><span class="grade b">B+</span></td></tr>
+<tr><td>분석 깊이</td><td><span class="grade b">B</span> 가격비와 예측 기준선</td><td><span class="grade">A-</span></td></tr>
+<tr><td>차별성·사업성</td><td colspan="2"><span class="grade">A</span> 못난이 적정가라는 새 지표</td></tr>
+</table></div>
+</div></details></section>
 <!-- ================================================================ 종합 -->
-<section id="sum">
- <span class="who">팀 주제 결정용</span>
- <h1 class="t">어떤 주제를 고를까</h1>
- <p class="promise">네 서비스를 실데이터로 돌려 본 결과를 과제 기준으로 정리했습니다.</p>
- <div id="sum-body"></div>
-</section>
 
 <footer>데이터: 서울 열린데이터광장(인허가·가락시장·상권), 국토교통부 실거래가(공공데이터포털). 지도 © OpenStreetMap contributors. 원본 데이터와 업체·개인 식별 정보는 올리지 않았고 집계값만 표시합니다.</footer>
 </main>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="topics.js"></script>
+<script src="story.js"></script>
 <script src="service.js"></script>
 <script src="app.js"></script>
 </body>
