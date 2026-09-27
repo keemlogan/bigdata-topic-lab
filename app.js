@@ -95,31 +95,6 @@ async function drawT1() {
   setTimeout(() => map.invalidateSize(), 100);
 }
 
-/* ---------------------------------------------------------------- T4 */
-async function drawT4() {
-  const d = await load("t4");
-  if (!d) return;
-  const s = d.summary;
-  kpis("#t4-kpi", [
-    [fmt(s.unique_awards), "용역 낙찰 건수 (2025년 6~8월)"],
-    [s.participants_median + "곳", "공고당 참가 업체 수 (중앙값)"],
-    [pct(s.single_bidder_share), "참가 업체가 1곳 이하인 공고"],
-    [fmt(s.winner_firms), "낙찰받은 서로 다른 업체 수"],
-  ]);
-  chart("t4-hist", { type: "bar", data: { labels: d.hist.map((x) => x[0]), datasets: [{ data: d.hist.map((x) => x[1]), backgroundColor: "#60a5fa" }] },
-    options: { maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { title: { display: true, text: "공고 수" } } } } });
-  chart("t4-win", { type: "bar", data: { labels: d.win_dist.map((x) => x[0]), datasets: [{ data: d.win_dist.map((x) => x[1]), backgroundColor: "#2563eb" }] },
-    options: { maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { type: "logarithmic", title: { display: true, text: "업체 수 (로그)" } } } } });
-  $("#t4-ag").innerHTML = `<tr><th>발주기관</th><th>낙찰 건수</th><th>참가 업체 중앙값</th><th>평균</th></tr>` +
-    d.agencies.map((a) => `<tr><td>${a[0]}</td><td>${fmt(a[1])}건</td><td>${a[2]}곳</td><td>${a[3]}곳</td></tr>`).join("");
-  $("#t4-facts").innerHTML = [
-    `<b>경쟁은 ‘보통 적고, 가끔 엄청 많다’.</b> 중앙값은 ${s.participants_median}곳인데 평균은 ${s.participants_mean}곳입니다. 100곳 넘게 몰린 공고가 ${pct(s.ge_100_bidders_share)} 있어 평균을 끌어올립니다.`,
-    `<b>다섯 건 중 한 건은 사실상 단독 응찰</b>입니다(${pct(s.single_bidder_share)}). 이런 공고를 찾는 것 자체가 중소기업에 유용한 정보입니다.`,
-    `<b>낙찰이 소수 업체에 크게 몰리진 않습니다.</b> 상위 1% 업체가 전체 낙찰의 ${pct(s.top1pct_firms_award_share)}를 가져갔고, 3개월 동안 5건 이상 낙찰받은 업체는 ${fmt(s.firms_ge5_wins)}곳입니다.`,
-    `<b>금액이 크다고 경쟁이 치열하진 않았습니다.</b> 낙찰 금액과 참가 업체 수의 순위 상관은 ${s.spearman_amount_vs_participants}로 거의 없습니다.`,
-  ].map((x) => `<li>${x}</li>`).join("");
-}
-
 /* ---------------------------------------------------------------- T5 */
 async function drawT5() {
   const d = await load("t5");
@@ -161,7 +136,7 @@ async function drawSum() { if (window.renderSum) window.renderSum(); }
 
 const DRAW = {
   t1: () => { svc.t1(); drawT1(); }, t3: () => { svc.t3(); drawT3(); }, t2: () => { svc.t2(); drawT2(); },
-  t4: () => { svc.t4(); drawT4(); }, t5: () => { svc.t5(); drawT5(); }, sum: drawSum,
+  t5: () => { svc.t5(); drawT5(); }, sum: drawSum,
 };
 function show() {
   const id = (location.hash || "#home").slice(1);

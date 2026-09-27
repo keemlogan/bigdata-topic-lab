@@ -144,34 +144,6 @@ window.svc = (() => {
     draw();
   }
 
-  /* ------------------------------------------------------------ 입찰할 기관 찾기 */
-  async function t4() {
-    const d = await load("svc_t4");
-    const box = document.getElementById("t4-demo");
-    if (!d) { box.innerHTML = '<div class="note">데이터를 불러오지 못했습니다.</div>'; return; }
-    const judge = (a) => a[1] < 20 ? ["", "표본 적음"] : a[4] >= 0.3 ? ["stop", "특정 업체 쏠림"] : a[2] <= 2 ? ["go", "경쟁 적음"] : a[2] >= 10 ? ["caution", "경쟁 치열"] : ["", "보통"];
-    box.innerHTML = `<div class="ask"><h3>직접 써보기</h3><p class="small">기관 이름으로 찾거나 조건으로 거르세요.</p>
-      <label for="t4-q">기관 이름</label><input type="search" id="t4-q" placeholder="예: 교육청, 공사, 시청" autocomplete="off">
-      <label for="t4-f">조건</label><select id="t4-f">${opt("go", "경쟁 적은 기관", true)}${opt("caution", "경쟁 치열한 기관")}${opt("all", "전체")}</select>
-      <p class="rule"><b>판정 규칙</b> (낙찰 20건 이상 기관만)<br>참가 업체 수 중앙값이 2곳 이하면 “경쟁 적음”, 10곳 이상이면 “경쟁 치열”, 1위 업체가 낙찰의 30% 이상을 가져갔으면 “특정 업체 쏠림”. 단독 응찰이 많은 기관은 제한경쟁·긴급 공고가 많아 참여 자격이 좁을 수 있으니 공고 조건을 함께 확인하세요.</p></div>
-      <div id="t4-plate" role="status" aria-live="polite"></div>`;
-    const draw = () => {
-      const q = document.getElementById("t4-q").value.trim(), f = document.getElementById("t4-f").value;
-      let list = d.agencies.filter((a) => !q || a[0].includes(q));
-      if (f !== "all") list = list.filter((a) => judge(a)[0] === f);
-      const shown = list.slice(0, 30);
-      const table = `<div class="also" style="padding-inline:0"><div class="tw" style="box-shadow:none"><table><tr><th>발주기관</th><th>낙찰</th><th>참가 업체 중앙값</th><th>단독 응찰</th><th>1위 업체 몫</th><th>판정</th></tr>
-        ${shown.map((a) => { const [c, t] = judge(a); return `<tr><td>${esc(a[0])}</td><td>${fmt(a[1])}건</td><td>${a[2]}곳</td><td>${pct(a[3])}</td><td>${pct(a[4])}</td><td>${c ? `<span class="tag ${c}">${t}</span>` : `<span class="small">${t}</span>`}</td></tr>`; }).join("")}</table></div>
-        ${list.length > 30 ? `<p class="small" style="margin:8px 0 0">${fmt(list.length)}곳 중 낙찰이 많은 30곳만 표시합니다.</p>` : ""}</div>`;
-      const label = f === "go" ? "경쟁 적은 기관" : f === "caution" ? "경쟁 치열한 기관" : "전체 기관";
-      document.getElementById("t4-plate").innerHTML = plate(f === "all" ? "" : f, `2025년 6~8월 용역 낙찰 · ${label}${q ? ` · “${esc(q)}”` : ""}`, `${fmt(list.length)}곳`,
-        `전체 공고의 참가 업체 중앙값은 ${d.all_median_participants}곳, 단독 응찰 비율은 ${pct(d.all_single)}입니다.`, [], table);
-    };
-    document.getElementById("t4-q").oninput = draw;
-    document.getElementById("t4-f").onchange = draw;
-    draw();
-  }
-
   /* ------------------------------------------------------------ 못난이 적정가 */
   async function t5() {
     const d = await load("svc_t5");
@@ -198,5 +170,5 @@ window.svc = (() => {
     draw();
   }
 
-  return { t1, t3, t2, t4, t5 };
+  return { t1, t3, t2, t5 };
 })();
